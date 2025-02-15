@@ -9,6 +9,9 @@ app.get('/gyazo/:id', async (c) => {
     cf: {
       cacheEverything: true,
       cacheTtl: 60 * 60 * 24 * 30,
+      image: {
+        format: 'webp'
+      }
     }
   })
 })
