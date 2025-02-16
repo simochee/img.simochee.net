@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import * as v from 'valibot'
 import { queryParamsSchema } from './schema'
+import { profiles, scaleSize } from './profile'
 
 const app = new Hono()
 
@@ -22,5 +23,20 @@ app.get('/gyazo/:id', async (c) => {
     }
   })
 })
+
+app.get('/gyazo/:id/:profile/:scale?', async (c) => {
+  const id = c.req.param('id')
+  const profile = c.req.param('profile')
+  const scale = c.req.param('scale')
+  const image = profiles[profile];
+
+  if (!image) {
+    return c.json({ error: 'Profile not found' }, 404)
+  }
+
+  return await fetch(`https://i.gyazo.com/${id}.png`, {
+    cf: { image: scaleSize(image, scale) }
+  })
+});
 
 export default app 

@@ -25,11 +25,16 @@ Gyazo にアップロードされた画像を最適化して取得します。
 [Cloudflare Images の最適化オプション](https://developers.cloudflare.com/images/transform-images/transform-via-workers/) と対応したクエリパラメータを指定できます。  
 詳しくは [schema.ts](./src/schema.ts) をご覧ください。
 
-### GET /gyazo/:id/:profile
+### GET /gyazo/:id/:profile[/:scale]
 
 Gyazo にアップロードされた画像を指定されたプロファイルで最適化して取得します。
 
 プロファイルの一覧は [profile.ts](./src/profile.ts) をご覧ください。
+
+scale は `1x`, `2x`, `3x` のいずれかを指定できます。  
+省略した場合は `1x` として扱われます。
+
+ただし、プロファイルに `width`, `height` が指定されていない場合は無視されます。
 
 ## License
 
