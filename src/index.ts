@@ -35,7 +35,11 @@ app.get('/gyazo/:id/:profile/:scale?', async (c) => {
   }
 
   return await fetch(`https://i.gyazo.com/${id}.png`, {
-    cf: { image: scaleSize(image, scale) }
+    cf: {
+      cacheEverything: true,
+      cacheTtl: 60 * 60 * 24 * 30,
+      image: scaleSize(image, scale)
+    }
   })
 });
 
